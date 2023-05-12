@@ -29,7 +29,8 @@ const SideTopheading = ({ setShow }) => {
           flex: 2,
           alignSelf: "flex-start",
           position: "absolute",
-          left: "95%",
+          top: -12,
+          left: "85%",
         }}
         onClick={() => {
           setShow(false);
@@ -38,8 +39,7 @@ const SideTopheading = ({ setShow }) => {
         <RxChevronLeft
           size={28}
           style={{
-            borderRadius: "50%",
-            border: "1px solid white",
+            border: "1px solid black",
             backgroundColor: "gray",
           }}
         />

@@ -20,7 +20,7 @@ const SidebarTabs = () => {
     >
       <Typography
         component="div"
-        variant="body"
+        variant="body1"
         sx={{ display: "flex", alignItems: "center", gap: "0.75rem" }}
       >
         <BsClipboard2Data />

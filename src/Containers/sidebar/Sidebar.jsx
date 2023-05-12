@@ -31,7 +31,7 @@ function Sidebar() {
           style={{
             position: "absolute",
             top: 20,
-            right: 0,
+            right: -15,
             borderRadius: "50%",
             border: "1px solid white",
             backgroundColor: "gray",

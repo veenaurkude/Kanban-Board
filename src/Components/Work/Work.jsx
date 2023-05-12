@@ -51,7 +51,7 @@ const Work = () => {
           boxSizing: "border-box",
           backgroundColor: task.task ? "white" : "",
           padding: "0.5rem 0rem 1rem 1rem ",
-          minWidth: "20%",
+          width: "20%",
         }}
       >
         <TextField
