@@ -25,13 +25,11 @@ export const dataSlice = createSlice({
       }
     },
     addCard: (state, action) => {
-      if (action.payload.id) {
-        state.cards.map((card, ind) => {
-          if (action.payload.id == card["id"]) {
-            state.cards[ind].card.push(action.payload.value);
-          }
-        });
-      }
+      state.cards.map((card, ind) => {
+        if (action.payload.id == card["id"]) {
+          state.cards[ind].card.push(action.payload.value);
+        }
+      });
     },
   },
 });

@@ -79,7 +79,7 @@ const Card = ({ id }) => {
             onClick={() => {
               if (value) {
                 setFocus(null);
-                dispatch(addCard({ id: 1, value: value }));
+                dispatch(addCard({ id: id, value: value }));
                 setValue("");
               } else {
                 alert("Sorry! You cannot set empty title");
