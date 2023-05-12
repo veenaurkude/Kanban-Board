@@ -5,12 +5,16 @@ import { HiOutlineTemplate } from "react-icons/hi";
 import Paper from "@mui/material/Paper";
 import DialogBox from "../Dialog/DialogBox";
 import CloseIcon from "@mui/icons-material/Close";
-const Card = () => {
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { addCard } from "../../Redux/slice/slice";
+
+const Card = ({ id }) => {
   const [focus, setFocus] = React.useState(null);
   const [value, setValue] = React.useState("");
-  const [array, setArray] = React.useState([]);
+  const cards = useSelector((state) => state.dataList.cards);
   const [open, setOpen] = React.useState(false);
-
+  const dispatch = useDispatch();
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -19,26 +23,25 @@ const Card = () => {
   };
   return (
     <>
-      {array &&
-        array.map((list, ind) => {
-          return (
-            <Paper
-              component="div"
-              onClick={handleClickOpen}
-              key={ind}
-              elevation={3}
-              sx={{
-                width: "90%",
-                boxSizing: "border-box",
-                padding: "0.5rem",
-                fontWeight: "bold",
-                marginBottom: "0.5rem",
-              }}
-            >
-              {list}
-            </Paper>
-          );
-        })}
+      {cards[id].card.map((list, ind) => {
+        return (
+          <Paper
+            component="div"
+            onClick={handleClickOpen}
+            key={ind}
+            elevation={3}
+            sx={{
+              width: "90%",
+              boxSizing: "border-box",
+              padding: "0.5rem",
+              fontWeight: "bold",
+              marginBottom: "0.5rem",
+            }}
+          >
+            {list}
+          </Paper>
+        );
+      })}
       <TextField
         onFocus={() => {
           setFocus(true);
@@ -51,7 +54,6 @@ const Card = () => {
         id={focus ? "outlined-multiline-flexible" : "outlined-multiline-static"}
         multiline
         placeholder={focus ? "Enter a title for this card..." : "+ Add a card"}
-        maxRows={4}
         rows={focus ? 3 : 0}
         sx={{
           "& fieldset": { border: focus ? "1px solid black" : "none" },
@@ -77,7 +79,7 @@ const Card = () => {
             onClick={() => {
               if (value) {
                 setFocus(null);
-                setArray([...array, value]);
+                dispatch(addCard({ id: 1, value: value }));
                 setValue("");
               } else {
                 alert("Sorry! You cannot set empty title");

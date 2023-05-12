@@ -5,16 +5,16 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import IconButton from "@mui/material/IconButton";
 import TextField from "@mui/material/TextField";
 import Card from "../card/Card";
+import { useDispatch, useSelector } from "react-redux";
+import { addTask } from "../../Redux/slice/slice";
+
 const Work = () => {
-  const [array, setArray] = React.useState([
-    { id: 1, task: "To do" },
-    { id: 2, task: "Doing" },
-    { id: 3, task: "Done" },
-  ]);
+  const dispatch = useDispatch();
+  const lists = useSelector((state) => state.dataList.list);
   const [task, setTask] = React.useState({ id: 0, task: "" });
   return (
     <Box component="div" className={Style.root}>
-      {array.map((ele) => {
+      {lists.map((ele) => {
         return (
           <Box
             key={ele.id}
@@ -40,7 +40,7 @@ const Work = () => {
                   alignItems: "flex-start !important",
                 }}
               >
-                <Card />
+                <Card id={ele.id} />
               </Box>
             </Box>
           </Box>
@@ -51,14 +51,14 @@ const Work = () => {
           boxSizing: "border-box",
           backgroundColor: task.task ? "white" : "",
           padding: "0.5rem 0rem 1rem 1rem ",
-          width: "20%",
+          minWidth: "20%",
         }}
       >
         <TextField
           hiddenLabel
           onChange={(e) => {
             setTask({
-              id: array[array.length - 1].id + 1,
+              id: lists[lists.length - 1].id + 1,
               task: e.target.value,
             });
           }}
@@ -88,7 +88,7 @@ const Work = () => {
               textTransform: "none",
             }}
             onClick={() => {
-              setArray([...array, task]);
+              dispatch(addTask({ id: task.id, task: task.task }));
               setTask({
                 id: 0,
                 task: "",
